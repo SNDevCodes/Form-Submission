@@ -63,3 +63,26 @@ form input[type="submit"] {
 .text-centre {
     text-align: center;
 }
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.password-wrapper input {
+    flex: 1;
+    padding-right: 60px;
+    /* space for button */
+}
+
+.password-wrapper .toggle-password {
+    position: absolute;
+    right: 15px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
