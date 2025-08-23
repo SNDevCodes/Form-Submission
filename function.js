@@ -4,6 +4,24 @@ function isEmail(email) {
 }
 
 $(document).ready(function () {
+
+    // 👇 Show/Hide Password toggle
+    $(".toggle-password").on("click", function () {
+        let pwField = $("#pw");
+        let confirmField = $("#confirmpw");
+
+        if (pwField.attr("type") === "password") {
+            pwField.attr("type", "text");
+            confirmField.attr("type", "text");
+            $(".toggle-password").text("Hide"); // change all buttons text
+        } else {
+            pwField.attr("type", "password");
+            confirmField.attr("type", "password");
+            $(".toggle-password").text("Show");
+        }
+    });
+
+    // 👇 Your existing validation
     $('form').submit(function (event) {
         event.preventDefault(); // Prevent form from reloading the page
 
