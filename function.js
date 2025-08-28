@@ -21,7 +21,7 @@ $(document).ready(function () {
         }
     });
 
-    // 👇 Your existing validation
+    // 👇 Validation on submit
     $('form').submit(function (event) {
         event.preventDefault(); // Prevent form from reloading the page
 
@@ -51,17 +51,25 @@ $(document).ready(function () {
             return;
         }
 
-        // Validate format
+        // Validate email format
         if (!isEmail($('#email').val())) {
             errormsg += "<p>Email ID is not valid</p>";
         }
-        if (!$.isNumeric($('#phone').val())) {
-            errormsg += "<p>Phone Number is not valid</p>";
+
+        // ✅ Phone validation (digits first, then length)
+        let phoneVal = $('#phone').val();
+        if (!/^\d+$/.test(phoneVal)) {
+            errormsg += "<p>Phone Number must contain only digits</p>";
+        } else if (phoneVal.length !== 10) {
+            errormsg += "<p>Phone Number must be exactly 10 digits</p>";
         }
+
+        // Validate password match
         if ($('#pw').val() !== $('#confirmpw').val()) {
             errormsg += "<p>Passwords do not match</p>";
         }
 
+        // Final output
         if (errormsg === '') {
             $('#success').html('<p style="color: green;">You are registered successfully.</p>').show();
             $('#error').hide();
