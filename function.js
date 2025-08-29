@@ -5,9 +5,12 @@ function isEmail(email) {
 
 $(document).ready(function () {
 
-    // 👇 Allow only numbers in Phone field
+    // 👇 Allow only numbers and max 10 digits
     $("#phone").on("input", function () {
         this.value = this.value.replace(/\D/g, ""); // remove non-digits
+        if (this.value.length > 10) {
+            this.value = this.value.slice(0, 10); // trim to 10 digits
+        }
     });
 
     // 👇 Show/Hide Password toggle
@@ -61,12 +64,10 @@ $(document).ready(function () {
             errormsg += "<p>Email ID is not valid</p>";
         }
 
-        // ✅ Phone validation (only digits allowed, length check removed since >10 is allowed)
+        // ✅ Phone validation (must be exactly 10 digits now)
         let phoneVal = $('#phone').val();
-        if (!/^\d+$/.test(phoneVal)) {
-            errormsg += "<p>Phone Number must contain only digits</p>";
-        } else if (phoneVal.length < 10) {
-            errormsg += "<p>Phone Number must be at least 10 digits</p>";
+        if (phoneVal.length !== 10) {
+            errormsg += "<p>Phone Number must be exactly 10 digits</p>";
         }
 
         // Validate password match
