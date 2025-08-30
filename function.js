@@ -70,8 +70,17 @@ $(document).ready(function () {
             errormsg += "<p>Phone Number must be exactly 10 digits</p>";
         }
 
-        // Validate password match
-        if ($('#pw').val() !== $('#confirmpw').val()) {
+        // ✅ Password strength validation
+        let passwordVal = $('#pw').val();
+        let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,15}$/;
+
+        if (!passwordRegex.test(passwordVal)) {
+            alert("Password is not accepted. It must be 8–15 characters long, contain at least one uppercase letter, one lowercase letter, and one special character.");
+            return; // stop submission immediately
+        }
+
+        // ✅ Password match validation
+        if (passwordVal !== $('#confirmpw').val()) {
             errormsg += "<p>Passwords do not match</p>";
         }
 
